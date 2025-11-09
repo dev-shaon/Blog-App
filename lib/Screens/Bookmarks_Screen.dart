@@ -23,7 +23,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
         child: Column(
           children: [
             SizedBox(height: 12,),
-            Textfield(text: 'Search  bookmarks',icon: Icons.search,),
+            CustomTextfield(text: 'Search  bookmarks',icon: Icons.search,),
           ],
         ),
       )),

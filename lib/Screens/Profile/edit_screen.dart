@@ -1,3 +1,4 @@
+import 'package:blog_app/Wigets/button_Wigets.dart';
 import 'package:flutter/material.dart';
 
 class EditScreen extends StatefulWidget {
@@ -22,12 +23,82 @@ class _EditScreenState extends State<EditScreen> {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            SizedBox(height: 10,),
+            SizedBox(height: 10),
             Center(
               child: Image(image: AssetImage("assets/images/girlprofile.png")),
             ),
-            SizedBox(height: 16,),
-            Text("Sophia Carter"),
+            SizedBox(height: 16),
+            Text(
+              "Sophia Carter",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+            ),
+            Text(
+              "@sophiacarter",
+              style: TextStyle(color: Colors.grey, fontSize: 16),
+            ),
+            SizedBox(height: 22),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  "Display Name",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            TextField(
+              decoration: InputDecoration(
+                fillColor: const Color.fromARGB(255, 44, 57, 63),
+                filled: true,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+              ),
+            ),
+            SizedBox(height: 18),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  "Email",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            TextField(
+              decoration: InputDecoration(
+                fillColor: const Color.fromARGB(255, 44, 57, 63),
+                filled: true,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  "Bio",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            TextField(
+              decoration: InputDecoration(
+                fillColor: const Color.fromARGB(255, 44, 57, 63),
+                filled: true,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+              ),
+            ),
+            SizedBox(height: 170),
+            CustomButton(text: 'Save Changes', onPressed: () {  },),
           ],
         ),
       ),

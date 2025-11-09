@@ -32,28 +32,28 @@ class _SignupScreenState extends State<SignupScreen> {
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 4),
-            Textfield(text: 'username'),
+            CustomTextfield(text: 'username'),
             SizedBox(height: 16),
             Text(
               "E-mail",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 4),
-            Textfield(text: 'enter your email'),
+            CustomTextfield(text: 'enter your email'),
             SizedBox(height: 16),
             Text(
               "Password",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 4),
-            Textfield(text: 'enter your password'),
+            CustomTextfield(text: 'enter your password'),
             SizedBox(height: 16),
             Text(
               "Confirm Password",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 4),
-            Textfield(text: 'Confirm your Password'),
+            CustomTextfield(text: 'Confirm your Password'),
             SizedBox(height: 30),
             Center(child: CustomButton(text: "Register", onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomNavScreens()));
