@@ -1,4 +1,4 @@
-import 'package:blog_app/Screens/Home_screens.dart';
+import 'package:blog_app/Screens/BottomNav_Screens.dart';
 import 'package:blog_app/Wigets/button_Wigets.dart';
 import 'package:blog_app/Wigets/textField_wiget.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +56,7 @@ class _SignupScreenState extends State<SignupScreen> {
             Textfield(text: 'Confirm your Password'),
             SizedBox(height: 30),
             Center(child: CustomButton(text: "Register", onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreens()));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomNavScreens()));
             })),
           ],
         ),
