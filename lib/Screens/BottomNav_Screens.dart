@@ -1,5 +1,6 @@
 import 'package:blog_app/Screens/Bookmarks_Screen.dart';
 import 'package:blog_app/Screens/Home_Screen.dart';
+import 'package:blog_app/Screens/Profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavScreens extends StatefulWidget {
@@ -14,7 +15,7 @@ class _HomeScreensState extends State<BottomNavScreens> {
   final List<Widget> _pages = [
     HomeScreen(),
     BookmarksScreen(),
-    Center(child: Text("hujhh")),
+    ProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {
