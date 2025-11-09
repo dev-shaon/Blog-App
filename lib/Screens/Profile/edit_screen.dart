@@ -95,9 +95,10 @@ class _EditScreenState extends State<EditScreen> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14),
                 ),
+                contentPadding: EdgeInsets.symmetric(vertical: 60, horizontal: 16),
               ),
             ),
-            SizedBox(height: 170),
+            SizedBox(height: 140),
             CustomButton(text: 'Save Changes', onPressed: () {  },),
           ],
         ),

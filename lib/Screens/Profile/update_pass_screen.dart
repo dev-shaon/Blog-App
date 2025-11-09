@@ -20,42 +20,53 @@ class _UpdatePassScreenState extends State<UpdatePassScreen> {
         ),
         centerTitle: true,
       ),
-      body: SafeArea(child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            SizedBox(height: 16,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text("Current Password",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
-              ],
-            ),
-            SizedBox(height: 12,),
-            CustomTextfield(text: "Enter  your current password"),
-            SizedBox(height: 16,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text("New Password",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
-              ],
-            ),
-            SizedBox(height: 12,),
-            CustomTextfield(text: "Enter  your New Password"),
-            SizedBox(height: 16,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text("Confirm New Password",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
-              ],
-            ),
-            SizedBox(height: 12,),
-            CustomTextfield(text: "Confirm  your new password"),
-            SizedBox(height: 400,),
-            CustomButton(text: "Update Password", onPressed: (){})
-          ],
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "Current Password",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                ],
+              ),
+              SizedBox(height: 12),
+              CustomTextfield(text: "Enter  your current password"),
+              SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "New Password",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                ],
+              ),
+              SizedBox(height: 12),
+              CustomTextfield(text: "Enter  your New Password"),
+              SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "Confirm New Password",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                ],
+              ),
+              SizedBox(height: 12),
+              CustomTextfield(text: "Confirm  your new password"),
+              SizedBox(height: 400),
+              CustomButton(text: "Update Password", onPressed: () {}),
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }

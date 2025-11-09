@@ -1,3 +1,4 @@
+import 'package:blog_app/Screens/Details_screen.dart';
 import 'package:blog_app/Screens/Profile/edit_screen.dart';
 import 'package:blog_app/Screens/Profile/update_pass_screen.dart';
 import 'package:flutter/material.dart';
@@ -130,7 +131,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   minimumSize: Size(358, 40),
                   backgroundColor: const Color.fromARGB(255, 37, 47, 52)
                 ),
-                onPressed: (){}, 
+                //just show koranor jono 
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsScreen()));
+                }, 
               child: Text("Logout"))
             ],
           ),
