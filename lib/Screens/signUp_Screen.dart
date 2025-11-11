@@ -42,6 +42,13 @@ class _SignupScreenState extends State<SignupScreen> {
             CustomTextfield(text: 'enter your email'),
             SizedBox(height: 16),
             Text(
+              "Phone Number",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 4),
+            CustomTextfield(text: 'enter your Number'),
+            SizedBox(height: 16),
+            Text(
               "Password",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
