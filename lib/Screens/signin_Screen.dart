@@ -1,7 +1,9 @@
+import 'package:blog_app/API/Provider.dart';
 import 'package:blog_app/Screens/signUp_Screen.dart';
 import 'package:blog_app/Wigets/textField_wiget.dart';
 import 'package:blog_app/wigets/button_Wigets.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
@@ -11,8 +13,12 @@ class SigninScreen extends StatefulWidget {
 }
 
 class _SigninScreenState extends State<SigninScreen> {
+  final TextEditingController nameColtroller =TextEditingController();
+  final TextEditingController passwordController =TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    final auto =Provider.of<UserProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Sign in", style: TextStyle(fontWeight: FontWeight.bold)),
@@ -35,11 +41,14 @@ class _SigninScreenState extends State<SigninScreen> {
                 ),
               ),
               SizedBox(height: 14),
-              CustomTextfield(text: 'Email  or username'),
+              CustomTextfield(controller: nameColtroller,text: 'Email  or username'),
+              
               SizedBox(height: 14),
               CustomTextfield(text: 'Password'),
+
               SizedBox(height: 50),
               CustomButton(text: "Sign in", onPressed: () {}),
+
               SizedBox(height: 350),
               Text(
                 "Don't have an account?",

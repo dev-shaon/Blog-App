@@ -3,16 +3,19 @@ import 'package:flutter/material.dart';
 class CustomTextfield extends StatelessWidget {
   final String text;
   final IconData? icon; 
+  final TextEditingController?controller;
 
   const CustomTextfield({
     super.key,
     required this.text,
     this.icon,
+    this.controller
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       decoration: InputDecoration(
         prefixIcon: icon != null ? Icon(icon, color: Colors.white) : null, 
         fillColor: const Color.fromARGB(255, 53, 69, 77),
