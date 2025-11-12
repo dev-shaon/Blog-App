@@ -1,8 +1,17 @@
+import 'package:blog_app/API/Provider.dart';
 import 'package:blog_app/Screens/onboding.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -12,8 +21,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       darkTheme: ThemeData.dark(),
-      home: Onboding(),
+      home: const Onboding(),
       debugShowCheckedModeBanner: false,
-      );
+    );
   }
 }

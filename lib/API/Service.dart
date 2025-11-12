@@ -2,34 +2,32 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  static const String baseUrl = "https://api.zhndev.site/wp-json/blog-app/v1/auth/";
+  static const String baseUrl = "https://api.zhndev.site/wp-json/blog-app/v1";
   static String? token;
 
   static Future<void> postCall(
-    String endpoint,
     String name,
     String email,
-    String password,
-    int age,
-    bool isActive,
+    String phone,
+    String password, 
   ) async {
     try {
       final response = await http.post(
-        Uri.parse("$baseUrl$endpoint"),
-        headers: <String, String>{
+        Uri.parse("$baseUrl/auth/register"),
+        headers:{
           "Content-Type": "application/json",
-           "Authorization": "Bearer $token",
+           if (token != null) "Authorization": "Bearer $token",
         },
         body: jsonEncode({
           "name": name,
           "email": email,
+          "phone": phone,
           "password": password,
-          "age": age,
-          "isActive": isActive,
+
         }),
       );
 
-      if (response.statusCode == 201) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         final decodeData = jsonDecode(response.body);
         print("Post successful: $decodeData");
       } else {

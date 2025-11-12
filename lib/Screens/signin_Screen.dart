@@ -1,4 +1,5 @@
 import 'package:blog_app/API/Provider.dart';
+import 'package:blog_app/Screens/BottomNav_Screens.dart';
 import 'package:blog_app/Screens/signUp_Screen.dart';
 import 'package:blog_app/Wigets/textField_wiget.dart';
 import 'package:blog_app/wigets/button_Wigets.dart';
@@ -47,7 +48,12 @@ class _SigninScreenState extends State<SigninScreen> {
               CustomTextfield(text: 'Password'),
 
               SizedBox(height: 50),
-              CustomButton(text: "Sign in", onPressed: () {}),
+              CustomButton(text: "Sign in", onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => BottomNavScreens()),
+                  );
+              }),
 
               SizedBox(height: 350),
               Text(

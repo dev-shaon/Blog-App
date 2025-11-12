@@ -24,6 +24,14 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
+      body: ListView.builder(
+        itemCount:5 ,
+        itemBuilder: (context,index){
+          return ListTile(
+            title: Text('Mahfujar'),
+            subtitle: Text('mahfuj'),
+          );
+        }),
     );
   }
 }
