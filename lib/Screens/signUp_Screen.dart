@@ -14,11 +14,11 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  final TextEditingController UsernameController = TextEditingController();
-  final TextEditingController EmailController = TextEditingController();
-  final TextEditingController PhoneController = TextEditingController();
-  final TextEditingController PasswordController = TextEditingController();
-  final TextEditingController CPasswordController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController cpasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<UserProvider>(context);
@@ -41,7 +41,7 @@ class _SignupScreenState extends State<SignupScreen> {
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 4),
-            CustomTextfield(controller: UsernameController, text: 'username'),
+            CustomTextfield(controller: nameController, text: 'username'),
             SizedBox(height: 16),
 
             Text(
@@ -50,7 +50,7 @@ class _SignupScreenState extends State<SignupScreen> {
             ),
             SizedBox(height: 4),
             CustomTextfield(
-              controller: EmailController,
+              controller: emailController,
               text: 'enter your email',
             ),
             SizedBox(height: 16),
@@ -61,7 +61,7 @@ class _SignupScreenState extends State<SignupScreen> {
             ),
             SizedBox(height: 4),
             CustomTextfield(
-              controller: PhoneController,
+              controller: phoneController,
               text: 'enter your Number',
             ),
             SizedBox(height: 16),
@@ -72,7 +72,7 @@ class _SignupScreenState extends State<SignupScreen> {
             ),
             SizedBox(height: 4),
             CustomTextfield(
-              controller: PasswordController,
+              controller: passwordController,
               text: 'enter your password',
             ),
             SizedBox(height: 16),
@@ -83,7 +83,7 @@ class _SignupScreenState extends State<SignupScreen> {
             ),
             SizedBox(height: 4),
             CustomTextfield(
-              controller: CPasswordController,
+              controller: cpasswordController,
               text: 'Confirm your Password',
             ),
             SizedBox(height: 30),
@@ -92,11 +92,11 @@ class _SignupScreenState extends State<SignupScreen> {
               child: CustomButton(
                 text: "Register",
                 onPressed: () async {
-                  if (UsernameController.text.isEmpty ||
-                      EmailController.text.isEmpty ||
-                      PhoneController.text.isEmpty ||
-                      PasswordController.text.isEmpty ||
-                      CPasswordController.text.isEmpty) {
+                  if (nameController.text.isEmpty ||
+                      emailController.text.isEmpty ||
+                      phoneController.text.isEmpty ||
+                      passwordController.text.isEmpty ||
+                      cpasswordController.text.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text("Please fill all fields")),
                     );
@@ -104,7 +104,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   }
 
                   // Password match varification
-                  if (PasswordController.text != CPasswordController.text) {
+                  if (passwordController.text != cpasswordController.text) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text("Passwords do not match")),
                     );
@@ -112,10 +112,10 @@ class _SignupScreenState extends State<SignupScreen> {
                   }
                   final success = await auth.submit(
                     UserModel(
-                      name: UsernameController.text,
-                      email: EmailController.text,
-                      password: PasswordController.text,
-                      phone: PhoneController.text,
+                      name: nameController.text,
+                      email: emailController.text,
+                      password: passwordController.text,
+                      phone: phoneController.text,
                     ),
                   );
 

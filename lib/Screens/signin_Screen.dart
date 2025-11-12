@@ -14,12 +14,12 @@ class SigninScreen extends StatefulWidget {
 }
 
 class _SigninScreenState extends State<SigninScreen> {
-  final TextEditingController nameColtroller =TextEditingController();
-  final TextEditingController passwordController =TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final auto =Provider.of<UserProvider>(context);
+    final auth = Provider.of<UserProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Sign in", style: TextStyle(fontWeight: FontWeight.bold)),
@@ -42,25 +42,48 @@ class _SigninScreenState extends State<SigninScreen> {
                 ),
               ),
               SizedBox(height: 14),
-              CustomTextfield(controller: nameColtroller,text: 'Email  or username'),
-              
+              CustomTextfield(controller: emailController, text: 'Email or username'),
               SizedBox(height: 14),
-              CustomTextfield(text: 'Password'),
-
+              CustomTextfield(controller: passController, text: 'Password',),
               SizedBox(height: 50),
-              CustomButton(text: "Sign in", onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => BottomNavScreens()),
-                  );
-              }),
+              CustomButton(
+                text: "Sign in",
+                onPressed: () async {
+                  if (emailController.text.isEmpty || passController.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Please fill all fields")),
+                    );
+                    return;
+                  }
 
-              SizedBox(height: 350),
+                  final success = await auth.loginUser(
+                    emailController.text,
+                    passController.text,
+                  );
+
+                  if (success) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: Colors.green,
+                        content: Text("Login Successful"),
+                      ),
+                    );
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => BottomNavScreens()),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Login Failed")),
+                    );
+                  }
+                },
+              ),
+              Spacer(),
               Text(
                 "Don't have an account?",
                 style: TextStyle(fontSize: 14, color: Colors.grey),
               ),
-              SizedBox(height: 6),
               TextButton(
                 onPressed: () {
                   Navigator.push(

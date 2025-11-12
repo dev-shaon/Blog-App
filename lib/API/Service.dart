@@ -9,21 +9,20 @@ class ApiService {
     String name,
     String email,
     String phone,
-    String password, 
+    String password,
   ) async {
     try {
       final response = await http.post(
         Uri.parse("$baseUrl/auth/register"),
-        headers:{
+        headers: {
           "Content-Type": "application/json",
-           if (token != null) "Authorization": "Bearer $token",
+          if (token != null) "Authorization": "Bearer $token",
         },
         body: jsonEncode({
           "name": name,
           "email": email,
           "phone": phone,
           "password": password,
-
         }),
       );
 
@@ -33,7 +32,35 @@ class ApiService {
       } else {
         print("Post failed: ${response.statusCode}");
         print("Response body: ${response.body}");
-        throw Exception("Post request failed with status ${response.statusCode}");
+        throw Exception(
+          "Post request failed with status ${response.statusCode}",
+        );
+      }
+    } catch (e) {
+      print("Exception: $e");
+    }
+  }
+
+  static Future<void> loginUser(String email, String password) async {
+    try {
+      final response = await http.post(
+        Uri.parse("$baseUrl/auth/login"),
+        headers: {
+          "Content-Type": "application/json",
+          if (token != null) "Authorization": "Bearer $token",
+        },
+        body: jsonEncode({"email": email, "password": password}),
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final decodeData = jsonDecode(response.body);
+        print("Post successful: $decodeData");
+      } else {
+        print("Post failed: ${response.statusCode}");
+        print("Response body: ${response.body}");
+        throw Exception(
+          "Post request failed with status ${response.statusCode}",
+        );
       }
     } catch (e) {
       print("Exception: $e");
