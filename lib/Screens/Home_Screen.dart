@@ -1,3 +1,5 @@
+import 'package:blog_app/API/Service.dart';
+import 'package:blog_app/API/model.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -8,30 +10,79 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<PostModel> posts = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchPosts();
+  }
+
+  void fetchPosts() async {
+    posts = await ApiService.getPosts();
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Blog", style: TextStyle(fontWeight: FontWeight.bold)),
+        title: Text(
+          "Blog",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.search, size: 26),
-            ),
-          ),
-        ],
       ),
-      body: ListView.builder(
-        itemCount:5 ,
-        itemBuilder: (context,index){
-          return ListTile(
-            title: Text('Mahfujar'),
-            subtitle: Text('mahfuj'),
-          );
-        }),
+      body: isLoading
+          ? Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: posts.length,
+              itemBuilder: (context, index) {
+                final post = posts[index];
+                return Card(
+                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                post.title,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16),
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                post.excerpt,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                'Technology: ${post.technology}',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        CircleAvatar(
+                          radius: 30,
+                          backgroundImage: NetworkImage(post.avatar),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
     );
   }
 }

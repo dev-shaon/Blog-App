@@ -103,13 +103,14 @@ class _SignupScreenState extends State<SignupScreen> {
                     return;
                   }
 
-                  // Password match varification
                   if (passwordController.text != cpasswordController.text) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text("Passwords do not match")),
                     );
                     return;
                   }
+
+
                   final success = await auth.submit(
                     UserModel(
                       name: nameController.text,
@@ -120,7 +121,6 @@ class _SignupScreenState extends State<SignupScreen> {
                   );
 
                   if (success) {
-                  // If success, then show message & navigate to next screen
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text("User Posted Successfully")),
                     );
@@ -130,7 +130,6 @@ class _SignupScreenState extends State<SignupScreen> {
                       MaterialPageRoute(builder: (context) => SigninScreen()),
                     );
                   } else {
-                    ///////////////// If failure,then show error message
                     ScaffoldMessenger.of(
                       context,
                     ).showSnackBar(SnackBar(content: Text("Failed to Post")));

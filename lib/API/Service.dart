@@ -1,10 +1,13 @@
 import 'dart:convert';
+import 'package:blog_app/API/model.dart';
 import 'package:http/http.dart' as http;
+
 
 class ApiService {
   static const String baseUrl = "https://api.zhndev.site/wp-json/blog-app/v1";
   static String? token;
 
+  //////////for Register
   static Future<void> postCall(
     String name,
     String email,
@@ -41,6 +44,7 @@ class ApiService {
     }
   }
 
+  /////////fon login
   static Future<void> loginUser(String email, String password) async {
     try {
       final response = await http.post(
@@ -66,4 +70,30 @@ class ApiService {
       print("Exception: $e");
     }
   }
+
+  ///////for get Api
+  static Future<List<PostModel>> getPosts() async {
+  try {
+    final response = await http.get(
+      Uri.parse("$baseUrl/posts"),
+      headers: {
+        "Content-Type": "application/json",
+        if (token != null) "Authorization": "Bearer $token",
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final decoded = jsonDecode(response.body);
+      final postsData = decoded['data']['posts'] as List; // <-- correct path
+      return postsData.map((json) => PostModel.fromJson(json)).toList();
+    } else {
+      throw Exception("Failed to fetch posts with status ${response.statusCode}");
+    }
+  } catch (e) {
+    print("Exception: $e");
+    return [];
+  }
+}
+
+
 }

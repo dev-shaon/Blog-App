@@ -42,13 +42,17 @@ class _SigninScreenState extends State<SigninScreen> {
                 ),
               ),
               SizedBox(height: 14),
-              CustomTextfield(controller: emailController, text: 'Email or username'),
+              CustomTextfield(
+                controller: emailController,
+                text: 'Email or username',
+              ),
               SizedBox(height: 14),
-              CustomTextfield(controller: passController, text: 'Password',),
+              CustomTextfield(controller: passController, text: 'Password'),
               SizedBox(height: 50),
               CustomButton(
                 text: "Sign in",
                 onPressed: () async {
+
                   if (emailController.text.isEmpty || passController.text.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text("Please fill all fields")),
@@ -68,17 +72,21 @@ class _SigninScreenState extends State<SigninScreen> {
                         content: Text("Login Successful"),
                       ),
                     );
+
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => BottomNavScreens()),
+                      MaterialPageRoute(
+                        builder: (context) => BottomNavScreens(),
+                      ),
                     );
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Login Failed")),
-                    );
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text("Login Failed")));
                   }
                 },
               ),
+
               Spacer(),
               Text(
                 "Don't have an account?",
