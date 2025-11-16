@@ -30,7 +30,7 @@ class _SigninScreenState extends State<SigninScreen> {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              SizedBox(height: 40),
+              SizedBox(height: 30),
               Center(
                 child: Text(
                   "Welcome Back!",

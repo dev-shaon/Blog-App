@@ -33,7 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Center(
                 child: Image(image: AssetImage("assets/images/boyprofile.png")),
               ),
-              SizedBox(height: 16),
+              SizedBox(height: 14),
               Text(
                 "Ethan Carter",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
@@ -124,7 +124,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 300,),
+              SizedBox(height: 240,),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,

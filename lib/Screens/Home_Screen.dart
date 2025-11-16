@@ -44,6 +44,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 final post = posts[index];
                 return Card(
                   margin: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  shadowColor: const Color.fromARGB(255, 52, 43, 219),
+                  elevation: 4,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(

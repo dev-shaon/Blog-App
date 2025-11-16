@@ -61,7 +61,7 @@ class _UpdatePassScreenState extends State<UpdatePassScreen> {
               ),
               SizedBox(height: 12),
               CustomTextfield(text: "Confirm  your new password"),
-              SizedBox(height: 400),
+              SizedBox(height: 330),
               CustomButton(text: "Update Password", onPressed: () {}),
             ],
           ),

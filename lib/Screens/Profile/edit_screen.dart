@@ -98,7 +98,7 @@ class _EditScreenState extends State<EditScreen> {
                 contentPadding: EdgeInsets.symmetric(vertical: 60, horizontal: 16),
               ),
             ),
-            SizedBox(height: 140),
+            SizedBox(height: 50),
             CustomButton(text: 'Save Changes', onPressed: () {  },),
           ],
         ),
