@@ -133,7 +133,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 
                 onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsScreen()));
+                  // Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsScreen()));
                 }, 
               child: Text("Logout"))
             ],

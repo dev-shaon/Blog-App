@@ -3,12 +3,14 @@ class PostModel {
   final String excerpt;
   final String technology;
   final String featuredImage;
+  final String content; 
 
   PostModel({
     required this.title,
     required this.excerpt,
     required this.technology,
     required this.featuredImage,
+    required this.content,
   });
 
   factory PostModel.fromJson(Map<String, dynamic> json) {
@@ -18,7 +20,8 @@ class PostModel {
       technology: json['categories'] is List
           ? (json['categories'] as List).join(', ')
           : '',
-      featuredImage: json['featured_image'] ?? '', // <-- image URL
+      featuredImage: json['featured_image'] ?? '',
+      content: json['content'] ?? '', // assign content from API
     );
   }
 }
