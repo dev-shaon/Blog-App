@@ -1,5 +1,5 @@
+import 'package:blog_app/API/Model/PostModel.dart';
 import 'package:blog_app/API/Service.dart';
-import 'package:blog_app/API/model.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -76,8 +76,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         SizedBox(width: 10),
                         CircleAvatar(
-                          radius: 30,
-                          backgroundImage: NetworkImage(post.avatar),
+                          radius: 40,
+                          backgroundImage: NetworkImage(post.featuredImage),
                         ),
                       ],
                     ),

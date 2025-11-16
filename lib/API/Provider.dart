@@ -1,5 +1,5 @@
 import 'package:blog_app/API/Service.dart';
-import 'package:blog_app/API/model.dart';
+import 'package:blog_app/API/Model/UserModel.dart';
 import 'package:flutter/material.dart';
 
 class UserProvider extends ChangeNotifier {

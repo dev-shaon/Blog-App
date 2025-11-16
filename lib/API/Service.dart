@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:blog_app/API/model.dart';
+import 'package:blog_app/API/Model/PostModel.dart';
 import 'package:http/http.dart' as http;
 
 
@@ -72,28 +72,28 @@ class ApiService {
   }
 
   ///////for get Api
-  static Future<List<PostModel>> getPosts() async {
-  try {
-    final response = await http.get(
-      Uri.parse("$baseUrl/posts"),
-      headers: {
-        "Content-Type": "application/json",
-        if (token != null) "Authorization": "Bearer $token",
-      },
-    );
+static Future<List<PostModel>> getPosts() async {
+    try {
+      final response = await http.get(
+        Uri.parse("$baseUrl/posts"),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      );
 
-    if (response.statusCode == 200) {
-      final decoded = jsonDecode(response.body);
-      final postsData = decoded['data']['posts'] as List; // <-- correct path
-      return postsData.map((json) => PostModel.fromJson(json)).toList();
-    } else {
-      throw Exception("Failed to fetch posts with status ${response.statusCode}");
+      if (response.statusCode == 200) {
+        final decoded = jsonDecode(response.body);
+        final postsData = decoded['data']['posts'] as List;
+        return postsData.map((json) => PostModel.fromJson(json)).toList();
+      } else {
+        throw Exception(
+            "Failed to fetch posts: ${response.statusCode}");
+      }
+    } catch (e) {
+      print("Exception: $e");
+      return [];
     }
-  } catch (e) {
-    print("Exception: $e");
-    return [];
   }
-}
 
 
 }
