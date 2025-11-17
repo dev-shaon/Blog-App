@@ -21,7 +21,7 @@ class PostModel {
           ? (json['categories'] as List).join(', ')
           : '',
       featuredImage: json['featured_image'] ?? '',
-      content: json['content'] ?? '', // assign content from API
+      content: json['content'] ?? '',
     );
   }
 }

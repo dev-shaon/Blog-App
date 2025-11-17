@@ -75,7 +75,49 @@ class DetailsScreen extends StatelessWidget {
             // ),
             SizedBox(height: 16),
             Text(post.excerpt, style: TextStyle(fontSize: 16)),
+            SizedBox(height: 16),
+            Row(
+              children: [
+                IconButton(onPressed: () {}, icon: Icon(Icons.favorite_border)),
+                Text("123"),
+                SizedBox(width: 20),
+                IconButton(onPressed: () {}, icon: Icon(Icons.comment)),
+                Text("45"),
+              ],
+            ),
+            SizedBox(height: 16),
+            Text(
+              "Comments",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            ),
           ],
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              CircleAvatar(
+                backgroundImage: AssetImage("assets/images/boyprofile.png"),
+              ),
+              SizedBox(width: 8),
+              Expanded(
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: "Write a message...",
+                    filled: true,
+                    fillColor: Colors.blueGrey,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
