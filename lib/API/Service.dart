@@ -81,7 +81,7 @@ static Future<List<PostModel>> getPosts() async {
         },
       );
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         final decoded = jsonDecode(response.body);
         final postsData = decoded['data']['posts'] as List;
         return postsData.map((json) => PostModel.fromJson(json)).toList();
@@ -94,6 +94,12 @@ static Future<List<PostModel>> getPosts() async {
       return [];
     }
   }
+
+
+
+
+
+
 
 
 }

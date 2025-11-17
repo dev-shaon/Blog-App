@@ -1,4 +1,5 @@
 class PostModel {
+  final int id;
   final String title;
   final String excerpt;
   final String technology;
@@ -6,6 +7,7 @@ class PostModel {
   final String content; 
 
   PostModel({
+    required this.id,
     required this.title,
     required this.excerpt,
     required this.technology,
@@ -15,6 +17,7 @@ class PostModel {
 
   factory PostModel.fromJson(Map<String, dynamic> json) {
     return PostModel(
+      id: json["id"],
       title: json['title'] ?? '',
       excerpt: json['excerpt'] ?? '',
       technology: json['categories'] is List
