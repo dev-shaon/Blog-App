@@ -1,4 +1,4 @@
-import 'package:blog_app/API/Provider.dart';
+import 'package:blog_app/API/Provider/Provider.dart';
 import 'package:blog_app/Screens/BottomNav_Screens.dart';
 import 'package:blog_app/Screens/signUp_Screen.dart';
 import 'package:blog_app/Wigets/textField_wiget.dart';

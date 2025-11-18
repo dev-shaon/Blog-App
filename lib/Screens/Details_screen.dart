@@ -1,5 +1,7 @@
+import 'package:blog_app/API/Provider/bookmark_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:blog_app/API/Model/PostModel.dart';
+import 'package:provider/provider.dart';
 
 class DetailsScreen extends StatelessWidget {
   
@@ -9,12 +11,23 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bookmarkProvider = Provider.of<BookmarkProvider>(context);
     return Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.bookmark_add, size: 30),
+            onPressed: () {
+              bookmarkProvider.toggleBookmark(post);
+            },
+            icon: Icon(
+              bookmarkProvider.isBookmarked(post)
+                  ? Icons.bookmark
+                  : Icons.bookmark_add,
+              size: 30,
+              color: bookmarkProvider.isBookmarked(post)
+                  ? Colors.red
+                  : Colors.white,
+            ),
           ),
         ],
       ),

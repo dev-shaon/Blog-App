@@ -1,22 +1,60 @@
+
+import 'package:blog_app/API/Service/Service.dart';
 import 'package:blog_app/Wigets/button_Wigets.dart';
 import 'package:flutter/material.dart';
 
 class EditScreen extends StatefulWidget {
-  const EditScreen({super.key});
+  final String currentName;
+  final String currentEmail;
+
+  const EditScreen({
+    super.key,
+    required this.currentName,
+    required this.currentEmail,
+  });
 
   @override
   State<EditScreen> createState() => _EditScreenState();
 }
 
 class _EditScreenState extends State<EditScreen> {
+  late TextEditingController nameController;
+  late TextEditingController emailController;
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    nameController = TextEditingController(text: widget.currentName);
+    emailController = TextEditingController(text: widget.currentEmail);
+  }
+
+  Future<void> saveProfile() async {
+    setState(() => isLoading = true);
+
+    final success = await ApiService.updateProfile(
+      token: ApiService.token!,
+      name: nameController.text,
+      phone: "", // API requires phone, keep empty or add field
+    );
+
+    setState(() => isLoading = false);
+
+    if (success) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Profile updated successfully")));
+      Navigator.pop(context, true);
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Failed to update profile")));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Edit Profile",
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
+        title: Text("Edit Profile", style: TextStyle(fontWeight: FontWeight.bold)),
         centerTitle: true,
       ),
       body: Padding(
@@ -25,81 +63,42 @@ class _EditScreenState extends State<EditScreen> {
           children: [
             SizedBox(height: 10),
             Center(
-              child: Image(image: AssetImage("assets/images/girlprofile.png")),
-            ),
-            SizedBox(height: 16),
-            Text(
-              "Sophia Carter",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-            ),
-            Text(
-              "@sophiacarter",
-              style: TextStyle(color: Colors.grey, fontSize: 16),
+              child: CircleAvatar(
+                radius: 50,
+                backgroundImage: AssetImage("assets/images/boyprofile.png"),
+              ),
             ),
             SizedBox(height: 22),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  "Display Name",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
             TextField(
+              controller: nameController,
               decoration: InputDecoration(
-                fillColor: const Color.fromARGB(255, 44, 57, 63),
+                labelText: "Name",
                 filled: true,
+                fillColor: Colors.grey[800],
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14),
                 ),
               ),
             ),
-            SizedBox(height: 18),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  "Email",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
+            SizedBox(height: 20),
             TextField(
+              controller: emailController,
               decoration: InputDecoration(
-                fillColor: const Color.fromARGB(255, 44, 57, 63),
+                labelText: "Email",
                 filled: true,
+                fillColor: Colors.grey[800],
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14),
                 ),
-              ),
-            ),
-            SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  "Bio",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            TextField(
-              decoration: InputDecoration(
-                fillColor: const Color.fromARGB(255, 44, 57, 63),
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                contentPadding: EdgeInsets.symmetric(vertical: 60, horizontal: 16),
               ),
             ),
             SizedBox(height: 50),
-            CustomButton(text: 'Save Changes', onPressed: () {  },),
+            isLoading
+                ? CircularProgressIndicator()
+                : CustomButton(
+                    text: "Save Changes",
+                    onPressed: saveProfile,
+                  ),
           ],
         ),
       ),

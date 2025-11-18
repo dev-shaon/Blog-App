@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:blog_app/API/Model/PostModel.dart';
+import 'package:blog_app/API/Model/User_Profile.dart';
 import 'package:http/http.dart' as http;
-
 
 class ApiService {
   static const String baseUrl = "https://api.zhndev.site/wp-json/blog-app/v1";
@@ -57,8 +57,9 @@ class ApiService {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        final decodeData = jsonDecode(response.body);
-        print("Post successful: $decodeData");
+        final data = jsonDecode(response.body);
+        token = data["data"]["token"];
+        print("Login Token Saved: $token");
       } else {
         print("Post failed: ${response.statusCode}");
         print("Response body: ${response.body}");
@@ -72,13 +73,11 @@ class ApiService {
   }
 
   ///////for get Api
-static Future<List<PostModel>> getPosts() async {
+  static Future<List<PostModel>> getPosts() async {
     try {
       final response = await http.get(
         Uri.parse("$baseUrl/posts"),
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: {"Content-Type": "application/json"},
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
@@ -86,8 +85,7 @@ static Future<List<PostModel>> getPosts() async {
         final postsData = decoded['data']['posts'] as List;
         return postsData.map((json) => PostModel.fromJson(json)).toList();
       } else {
-        throw Exception(
-            "Failed to fetch posts: ${response.statusCode}");
+        throw Exception("Failed to fetch posts: ${response.statusCode}");
       }
     } catch (e) {
       print("Exception: $e");
@@ -95,11 +93,40 @@ static Future<List<PostModel>> getPosts() async {
     }
   }
 
+  // 🔹 Get User Profile
+  static Future<UserProfile?> getProfile(String token) async {
+    final url = Uri.parse("$baseUrl/user/profile");
 
+    final response = await http.get(
+      url,
+      headers: {"Authorization": "Bearer $token"},
+    );
 
+    if (response.statusCode == 200) {
+      return UserProfile.fromJson(jsonDecode(response.body));
+    } else {
+      print("Failed to fetch profile: ${response.body}");
+      return null;
+    }
+  }
 
+  // 🔹 Update User Profile
+  static Future<bool> updateProfile({
+    required String token,
+    required String name,
+    required String phone,
+  }) async {
+    final url = Uri.parse("$baseUrl/user/profile");
 
+    final response = await http.put(
+      url,
+      headers: {
+        "Authorization": "Bearer $token",
+        "Content-Type": "application/json",
+      },
+      body: jsonEncode({"name": name, "phone": phone}),
+    );
 
-
-
+    return response.statusCode == 200;
+  }
 }

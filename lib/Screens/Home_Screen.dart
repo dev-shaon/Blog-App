@@ -1,5 +1,5 @@
 import 'package:blog_app/API/Model/PostModel.dart';
-import 'package:blog_app/API/Service.dart';
+import 'package:blog_app/API/Service/Service.dart';
 import 'package:blog_app/Screens/Details_screen.dart';
 import 'package:flutter/material.dart';
 
