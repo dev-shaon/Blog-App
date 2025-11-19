@@ -14,14 +14,12 @@ class UserProfile {
   });
 
   factory UserProfile.fromJson(Map<String, dynamic> json) {
-    final user = json["data"]["user"];
-
     return UserProfile(
-      id: user["id"],
-      name: user["name"],
-      email: user["email"],
-      phone: user["phone"],
-      registeredDate: user["registered_date"],
+      id: json["id"] ?? 0,
+      name: json["name"] ?? "",
+      email: json["email"] ?? "",
+      phone: json["phone"] ?? "",
+      registeredDate: json["registered_date"] ?? "",
     );
   }
 }

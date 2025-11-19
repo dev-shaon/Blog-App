@@ -1,4 +1,3 @@
-
 import 'package:blog_app/API/Service/Service.dart';
 import 'package:blog_app/Wigets/button_Wigets.dart';
 import 'package:flutter/material.dart';
@@ -41,12 +40,14 @@ class _EditScreenState extends State<EditScreen> {
     setState(() => isLoading = false);
 
     if (success) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Profile updated successfully")));
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Profile updated successfully")));
       Navigator.pop(context, true);
     } else {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Failed to update profile")));
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Failed to update profile")));
     }
   }
 
@@ -54,7 +55,10 @@ class _EditScreenState extends State<EditScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit Profile", style: TextStyle(fontWeight: FontWeight.bold)),
+        title: Text(
+          "Edit Profile",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
       ),
       body: Padding(
@@ -95,10 +99,7 @@ class _EditScreenState extends State<EditScreen> {
             SizedBox(height: 50),
             isLoading
                 ? CircularProgressIndicator()
-                : CustomButton(
-                    text: "Save Changes",
-                    onPressed: saveProfile,
-                  ),
+                : CustomButton(text: "Save Changes", onPressed: saveProfile),
           ],
         ),
       ),

@@ -93,22 +93,32 @@ class ApiService {
     }
   }
 
-  // 🔹 Get User Profile
-  static Future<UserProfile?> getProfile(String token) async {
-    final url = Uri.parse("$baseUrl/user/profile");
+ //Get User Profile
+static Future<UserProfile?> getProfile(String token) async {
+  final url = Uri.parse("$baseUrl/user/profile");
 
-    final response = await http.get(
-      url,
-      headers: {"Authorization": "Bearer $token"},
-    );
+  final response = await http.get(
+    url,
+    headers: {"Authorization": "Bearer $token"},
+  );
 
-    if (response.statusCode == 200) {
-      return UserProfile.fromJson(jsonDecode(response.body));
-    } else {
-      print("Failed to fetch profile: ${response.body}");
-      return null;
-    }
+  print("Profile Response: ${response.body}");
+
+  if (response.statusCode == 200) {
+    final jsonData = jsonDecode(response.body);
+
+    // Correct path to user object
+    final userJson = jsonData["data"]["user"];
+
+    return UserProfile.fromJson(userJson);
+  } else {
+    print("Failed to fetch profile: ${response.body}");
+    return null;
   }
+}
+
+
+
 
   // 🔹 Update User Profile
   static Future<bool> updateProfile({
