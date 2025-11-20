@@ -34,7 +34,7 @@ class _EditScreenState extends State<EditScreen> {
     final success = await ApiService.updateProfile(
       token: ApiService.token!,
       name: nameController.text,
-      phone: "", // API requires phone, keep empty or add field
+      phone: "",
     );
 
     setState(() => isLoading = false);

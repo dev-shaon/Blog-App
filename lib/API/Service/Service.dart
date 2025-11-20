@@ -57,12 +57,12 @@ class ApiService {
       final data = jsonDecode(response.body);
       if (data["success"] == true && data["data"]["token"] != null) {
         token = data["data"]["token"];
-        return true; // login successful
+        return true; 
       } else {
-        return false; // wrong email/password
+        return false;
       }
     } else {
-      return false; // server error or wrong credentials
+      return false;
     }
   } catch (e) {
     print("Login Exception: $e");
@@ -92,7 +92,7 @@ class ApiService {
     }
   }
 
-  //Get User Profile
+  //////Get User Profile
   static Future<UserProfile?> getProfile(String token) async {
     final url = Uri.parse("$baseUrl/user/profile");
 

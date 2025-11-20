@@ -22,7 +22,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> fetchUserProfile() async {
-    // Check if token exists
     if (ApiService.token == null) {
       print("Token is null. User not logged in!");
       setState(() {

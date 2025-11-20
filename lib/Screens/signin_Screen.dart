@@ -1,4 +1,5 @@
 import 'package:blog_app/API/Provider/Provider.dart';
+import 'package:blog_app/API/Service/Comment_service.dart';
 import 'package:blog_app/API/Service/Service.dart';
 import 'package:blog_app/Screens/BottomNav_Screens.dart';
 import 'package:blog_app/Screens/signUp_Screen.dart';
@@ -67,10 +68,12 @@ class _SigninScreenState extends State<SigninScreen> {
                   );
 
                   if (success) {
+                    CommentService.token = ApiService.token;
+
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         backgroundColor: Colors.green,
-                        content: Text("Login Successful"),
+                        content: Text("Log in Success"),
                       ),
                     );
 
@@ -79,7 +82,6 @@ class _SigninScreenState extends State<SigninScreen> {
                       MaterialPageRoute(builder: (_) => BottomNavScreens()),
                     );
                   } else {
-                    // ভুল ইমেইল বা পাসওয়ার্ড হলে alert দেখাবে
                     showDialog(
                       context: context,
                       builder: (_) => AlertDialog(

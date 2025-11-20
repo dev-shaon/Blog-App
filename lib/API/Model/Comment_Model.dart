@@ -1,15 +1,12 @@
 class CommentModel {
-  final int id;
-  final int postId;
-  final int userId;
-  final int parentId;
+  final String id;           // আগে int ছিল → এখন String
+  final String postId;       // আগে int ছিল → এখন String
+  final String userId;       // আগে int ছিল → এখন String
+  final String parentId;     // আগে int ছিল → এখন String
   final String content;
-  final int likesCount;
-  final String createdAt;
-  final String updatedAt;
-  final List<CommentModel> replies;
-  final bool isLiked;
   final String authorName;
+  final String createdAt;
+  // অন্যান্য ফিল্ড থাকলে রাখো (likes_count, is_liked ইত্যাদি)
 
   CommentModel({
     required this.id,
@@ -17,38 +14,19 @@ class CommentModel {
     required this.userId,
     required this.parentId,
     required this.content,
-    required this.likesCount,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.replies,
-    required this.isLiked,
     required this.authorName,
+    required this.createdAt,
   });
 
   factory CommentModel.fromJson(Map<String, dynamic> json) {
-    
-    // Safe replies parsing
-    List repliesFromJson = json['replies'] is List ? json['replies'] : [];
-
-    List<CommentModel> replyList =
-        repliesFromJson.map((r) => CommentModel.fromJson(r)).toList();
-
     return CommentModel(
-      id: json['id'] ?? 0,
-      postId: json['post_id'] ?? 0,
-      userId: json['user_id'] ?? 0,
-      parentId: json['parent_id'] ?? 0,
+      id: json['id'].toString(),                    // String-এ কনভার্ট
+      postId: json['post_id'].toString(),           // String-এ কনভার্ট
+      userId: json['user_id'].toString(),           // String-এ কনভার্ট
+      parentId: json['parent_id'].toString(),       // String-এ কনভার্ট
       content: json['content'] ?? '',
-      likesCount: json['likes_count'] ?? 0,
+      authorName: json['author_name'] ?? json['author']?['name'] ?? 'Unknown',
       createdAt: json['created_at'] ?? '',
-      updatedAt: json['updated_at'] ?? '',
-      replies: replyList,
-      isLiked: json['is_liked'] ?? false,
-
-      // Safe author name parsing
-      authorName: (json['author'] is Map && json['author']['name'] != null)
-          ? json['author']['name']
-          : 'Unknown',
     );
   }
 }
