@@ -26,8 +26,12 @@ class CommentModel {
   });
 
   factory CommentModel.fromJson(Map<String, dynamic> json) {
-    var repliesFromJson = json['replies'] as List? ?? [];
-    List<CommentModel> replyList = repliesFromJson.map((r) => CommentModel.fromJson(r)).toList();
+    
+    // Safe replies parsing
+    List repliesFromJson = json['replies'] is List ? json['replies'] : [];
+
+    List<CommentModel> replyList =
+        repliesFromJson.map((r) => CommentModel.fromJson(r)).toList();
 
     return CommentModel(
       id: json['id'] ?? 0,
@@ -40,7 +44,11 @@ class CommentModel {
       updatedAt: json['updated_at'] ?? '',
       replies: replyList,
       isLiked: json['is_liked'] ?? false,
-      authorName: json['author'] != null ? json['author']['name'] : 'Unknown',
+
+      // Safe author name parsing
+      authorName: (json['author'] is Map && json['author']['name'] != null)
+          ? json['author']['name']
+          : 'Unknown',
     );
   }
 }

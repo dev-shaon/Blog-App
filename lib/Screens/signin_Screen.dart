@@ -1,4 +1,5 @@
 import 'package:blog_app/API/Provider/Provider.dart';
+import 'package:blog_app/API/Service/Service.dart';
 import 'package:blog_app/Screens/BottomNav_Screens.dart';
 import 'package:blog_app/Screens/signUp_Screen.dart';
 import 'package:blog_app/Wigets/textField_wiget.dart';
@@ -52,8 +53,8 @@ class _SigninScreenState extends State<SigninScreen> {
               CustomButton(
                 text: "Sign in",
                 onPressed: () async {
-
-                  if (emailController.text.isEmpty || passController.text.isEmpty) {
+                  if (emailController.text.isEmpty ||
+                      passController.text.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text("Please fill all fields")),
                     );
@@ -75,14 +76,23 @@ class _SigninScreenState extends State<SigninScreen> {
 
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => BottomNavScreens(),
-                      ),
+                      MaterialPageRoute(builder: (_) => BottomNavScreens()),
                     );
                   } else {
-                    ScaffoldMessenger.of(
-                      context,
-                    ).showSnackBar(SnackBar(content: Text("Login Failed")));
+                    // ভুল ইমেইল বা পাসওয়ার্ড হলে alert দেখাবে
+                    showDialog(
+                      context: context,
+                      builder: (_) => AlertDialog(
+                        title: Text("Login Failed"),
+                        content: Text("Email or password is incorrect"),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: Text("OK"),
+                          ),
+                        ],
+                      ),
+                    );
                   }
                 },
               ),

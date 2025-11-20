@@ -31,18 +31,13 @@ class UserProvider extends ChangeNotifier {
   // for Login
   Future<bool> loginUser(String email, String password) async {
     try {
-      isLoading = true;
-      notifyListeners();
-
-      await ApiService.loginUser(email, password);
-
-      return true;
+      // ApiService.loginUser return type Future<bool> না, তাই update করতে হবে
+      final success = await ApiService.loginUser(email, password);
+      // যদি token সেট হয়, তাহলে success true
+      return ApiService.token != null;
     } catch (e) {
-      print("⚠️ Login error: $e");
+      print("Login error: $e");
       return false;
-    } finally {
-      isLoading = false;
-      notifyListeners();
     }
   }
 }
