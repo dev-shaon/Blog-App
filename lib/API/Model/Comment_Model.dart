@@ -1,12 +1,11 @@
 class CommentModel {
-  final String id;           // আগে int ছিল → এখন String
-  final String postId;       // আগে int ছিল → এখন String
-  final String userId;       // আগে int ছিল → এখন String
-  final String parentId;     // আগে int ছিল → এখন String
+  final String id;           
+  final String postId;       
+  final String userId;       
+  final String parentId;     
   final String content;
   final String authorName;
   final String createdAt;
-  // অন্যান্য ফিল্ড থাকলে রাখো (likes_count, is_liked ইত্যাদি)
 
   CommentModel({
     required this.id,
@@ -20,10 +19,10 @@ class CommentModel {
 
   factory CommentModel.fromJson(Map<String, dynamic> json) {
     return CommentModel(
-      id: json['id'].toString(),                    // String-এ কনভার্ট
-      postId: json['post_id'].toString(),           // String-এ কনভার্ট
-      userId: json['user_id'].toString(),           // String-এ কনভার্ট
-      parentId: json['parent_id'].toString(),       // String-এ কনভার্ট
+      id: json['id'].toString(),                   
+      postId: json['post_id'].toString(),           
+      userId: json['user_id'].toString(),           
+      parentId: json['parent_id'].toString(),      
       content: json['content'] ?? '',
       authorName: json['author_name'] ?? json['author']?['name'] ?? 'Unknown',
       createdAt: json['created_at'] ?? '',

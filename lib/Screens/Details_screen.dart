@@ -140,7 +140,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
             SizedBox(height: 16),
             Text(widget.post.excerpt, style: TextStyle(fontSize: 16)),
             SizedBox(height: 16),
-            // Like & Comment count (dummy for now)
             Row(
               children: [
                 IconButton(onPressed: () {}, icon: Icon(Icons.favorite_border)),
@@ -156,7 +155,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
             SizedBox(height: 16),
-            // Loading indicator
+                                     //--> Loading indicator
             if (isLoading)
               Center(child: CircularProgressIndicator())
             else

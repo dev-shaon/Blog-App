@@ -31,9 +31,9 @@ class UserProvider extends ChangeNotifier {
   // Login method
   Future<bool> loginUser(String email, String password) async {
     try {
-      // Call APIService loginUser
+
       final success = await ApiService.loginUser(email, password);
-      return success; // true or false depending on login
+      return success;
     } catch (e) {
       print("Login error: $e");
       return false;

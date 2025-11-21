@@ -6,7 +6,7 @@ class BookmarkProvider extends ChangeNotifier {
 
   List<PostModel> get bookmarks => _bookmarks;
 
-  // bookmark add/remove toggle
+  // bookmark add/remove 
   void toggleBookmark(PostModel post) {
     if (isBookmarked(post)) {
       _bookmarks.removeWhere((p) => p.id == post.id);
