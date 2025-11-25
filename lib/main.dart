@@ -1,17 +1,24 @@
 import 'package:blog_app/API/Provider/Provider.dart';
 import 'package:blog_app/API/Provider/bookmark_provider.dart';
+import 'package:blog_app/API/Service/Service.dart';
 import 'package:blog_app/Screens/onboding.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  ApiService.token = prefs.getString("token");
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => BookmarkProvider()),
       ],
-      child: const BlogApp(),
+      child: BlogApp(),
     ),
   );
 }

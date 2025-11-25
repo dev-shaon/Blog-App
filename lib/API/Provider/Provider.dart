@@ -6,7 +6,7 @@ class UserProvider extends ChangeNotifier {
   bool isLoading = false;
 
   // Registration method
-  Future<bool> submit(UserModel user) async {
+  Future<bool> registration(UserModel user) async {
     try {
       isLoading = true;
       notifyListeners();

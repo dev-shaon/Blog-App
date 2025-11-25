@@ -111,7 +111,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   }
 
 
-                  final success = await auth.submit(
+                  final success = await auth.registration(
                     UserModel(
                       name: nameController.text,
                       email: emailController.text,
@@ -129,6 +129,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       context,
                       MaterialPageRoute(builder: (context) => SigninScreen()),
                     );
+                    
                   } else {
                     ScaffoldMessenger.of(
                       context,

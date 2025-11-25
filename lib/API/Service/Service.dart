@@ -92,7 +92,7 @@ class ApiService {
     }
   }
 
-  //////Get User Profile
+  //////for Get User Profile
   static Future<UserProfile?> getProfile(String token) async {
     final url = Uri.parse("$baseUrl/user/profile");
 
@@ -115,7 +115,7 @@ class ApiService {
     }
   }
 
-  // Update User Profile
+  //for Update User Profile
   static Future<bool> updateProfile({
     required String token,
     required String name,
@@ -135,7 +135,7 @@ class ApiService {
     return response.statusCode == 200;
   }
 
-  // Change Password
+  //for Change Password
 static Future<Map<String, dynamic>> changePassword({
   required String currentPassword,
   required String newPassword,
@@ -169,6 +169,25 @@ static Future<Map<String, dynamic>> changePassword({
       "success": false,
       "message": "Failed to change password",
     };
+  }
+}
+
+//for logout
+
+static Future<bool> logout(String token) async {
+  final url = Uri.parse("$baseUrl/auth/logout");
+
+  final response = await http.post(
+    url,
+    headers: {
+      "Authorization": "Bearer $token",
+    },
+  );
+
+  if (response.statusCode == 200 || response.statusCode == 201) {
+    return true;
+  } else {
+    return false;
   }
 }
 

@@ -2,7 +2,9 @@ import 'package:blog_app/API/Model/User_Profile.dart';
 import 'package:blog_app/API/Service/Service.dart';
 import 'package:blog_app/Screens/Profile/edit_screen.dart';
 import 'package:blog_app/Screens/Profile/update_pass_screen.dart';
+import 'package:blog_app/Screens/signin_Screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -155,6 +157,62 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 fontSize: 16,
                               ),
                             ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 350),
+                  InkWell(
+                    onTap: () async {
+                      if (ApiService.token == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("You are not logged in!")),
+                        );
+                        return;
+                      }
+
+                      bool success = await ApiService.logout(ApiService.token!);
+
+                      if (success) {
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        await prefs.remove("token");
+
+                        ApiService.token = null;
+
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (_) => SigninScreen()),
+                          (route) => false,
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Logout failed!")),
+                        );
+                      }
+                    },
+                    child: Container(
+                      height: 50,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: Colors.grey[800],
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(14),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "LogOut",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
+                            ),
+                            SizedBox(width: 10),
+                            Icon(Icons.logout, color: Colors.white),
                           ],
                         ),
                       ),

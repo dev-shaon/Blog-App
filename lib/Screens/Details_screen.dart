@@ -212,7 +212,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   decoration: InputDecoration(
                     hintText: "Write a comment...",
                     filled: true,
-                    fillColor: Colors.grey[200],
+                    fillColor: Colors.blueGrey,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                       borderSide: BorderSide.none,
@@ -220,7 +220,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 16),
                     suffixIcon: IconButton(
-                      icon: Icon(Icons.send),
+                      icon: Icon(Icons.send,color: Colors.white,),
                       onPressed: postComment,
                     ),
                   ),

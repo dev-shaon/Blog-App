@@ -9,7 +9,7 @@ class CommentService {
   // Fetch comments
   static Future<List<CommentModel>> getComments({required int postId}) async {
   try {
-    print("Token আছে কি না: ${CommentService.token}"); 
+    print("Token : ${CommentService.token}"); 
 
     final response = await http.get(
       Uri.parse("$baseUrl/comments/post/$postId"),
@@ -36,7 +36,6 @@ class CommentService {
       return commentsData.map((json) => CommentModel.fromJson(json)).toList();
     } else {
       return [];
-    [];
     }
   } catch (e) {
     print("Error fetching comments: $e");

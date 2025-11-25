@@ -7,6 +7,7 @@ import 'package:blog_app/Wigets/textField_wiget.dart';
 import 'package:blog_app/wigets/button_Wigets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
@@ -49,7 +50,11 @@ class _SigninScreenState extends State<SigninScreen> {
                 text: 'Email or username',
               ),
               SizedBox(height: 14),
-              CustomTextfield(controller: passController, text: 'Password'),
+              CustomTextfield(
+                controller: passController,
+                text: 'Password',
+                obscureText: true,
+              ),
               SizedBox(height: 50),
               CustomButton(
                 text: "Sign in",
@@ -63,17 +68,24 @@ class _SigninScreenState extends State<SigninScreen> {
                   }
 
                   final success = await auth.loginUser(
-                    emailController.text,
-                    passController.text,
+                    emailController.text.trim(),
+                    passController.text.trim(),
                   );
+
+                  if (!mounted) return;
 
                   if (success) {
                     CommentService.token = ApiService.token;
 
+                    //token Save in SharedPreferences.
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    await prefs.setString("token", ApiService.token!);
+
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         backgroundColor: Colors.green,
-                        content: Text("Log in Success"),
+                        content: Text("Login Successful"),
                       ),
                     );
 
@@ -100,6 +112,7 @@ class _SigninScreenState extends State<SigninScreen> {
               ),
 
               Spacer(),
+              
               Text(
                 "Don't have an account?",
                 style: TextStyle(fontSize: 14, color: Colors.grey),
