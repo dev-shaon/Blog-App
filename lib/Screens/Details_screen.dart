@@ -25,19 +25,18 @@ class _DetailsScreenState extends State<DetailsScreen> {
     fetchComments();
   }
 
-  // Fetch comments from API
+
   Future<void> fetchComments() async {
     setState(() => isLoading = true);
     comments = await CommentService.getComments(postId: widget.post.id);
     setState(() => isLoading = false);
   }
 
-  // Post a new comment
   Future<void> postComment() async {
     final content = commentController.text.trim();
     if (content.isEmpty) return;
 
-    // Token check
+
     if (CommentService.token == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("You must be logged in to comment")),
@@ -52,7 +51,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
     if (newComment != null) {
       setState(() {
-        comments.insert(0, newComment); // Show new comment at top
+        comments.insert(0, newComment); 
         commentController.clear();
       });
     } else {
@@ -97,7 +96,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Post Image
+            // Post er image
             Image.network(
               widget.post.featuredImage,
               width: double.infinity,
@@ -105,13 +104,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
               fit: BoxFit.cover,
             ),
             SizedBox(height: 16),
-            // Post Title
+            // Post er Title
             Text(
               widget.post.title,
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 12),
-            // Author info
             Row(
               children: [
                 CircleAvatar(
@@ -155,11 +153,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
             SizedBox(height: 16),
-                                     //--> Loading indicator
             if (isLoading)
               Center(child: CircularProgressIndicator())
             else
-              // Comment list
               ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
