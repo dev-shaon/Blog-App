@@ -188,7 +188,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("Logout failed!")),
+                          SnackBar(content: Text("Logout failed ")),
                         );
                       }
                     },

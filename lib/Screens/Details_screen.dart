@@ -136,7 +136,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
               ],
             ),
             SizedBox(height: 16),
+
             Text(widget.post.excerpt, style: TextStyle(fontSize: 16)),
+            
             SizedBox(height: 16),
             Row(
               children: [
@@ -206,7 +208,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 child: TextField(
                   controller: commentController,
                   decoration: InputDecoration(
-                    hintText: "Write a comment...",
+                    hintText: "Write a comment......",
                     filled: true,
                     fillColor: Colors.blueGrey,
                     border: OutlineInputBorder(
